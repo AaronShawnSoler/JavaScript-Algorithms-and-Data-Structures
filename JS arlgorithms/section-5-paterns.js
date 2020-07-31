@@ -1,4 +1,6 @@
+//==========================================
 // Frequency Counter - validAnagram
+//==========================================
 
 function validAnagram(str1, str2) {
 
@@ -43,3 +45,30 @@ validAnagram('awesome', 'awesom') // false
 validAnagram('amanaplanacanalpanama', 'acanalmanplanpamana') // false
 validAnagram('qwerty', 'qeywrt') // true
 validAnagram('texttwisttime', 'timetwisttext') // true
+
+//==========================================
+// Multiple Pointers - countUniqueValues
+//==========================================
+
+function countUniqueValues(arr) {
+    if(arr.length == 0) {
+        return 0
+    }
+
+    let unique = 1
+    let last = arr[0]
+
+    for(let num in arr) {
+        if(arr[num] != last) {
+            unique += 1
+        }
+        last = arr[num]
+    }
+
+    return unique
+}
+
+countUniqueValues([1,1,1,1,1,2]) // 2
+countUniqueValues([1,2,3,4,4,4,7,7,12,12,13]) // 7
+countUniqueValues([]) // 0
+countUniqueValues([-2,-1,-1,0,1]) // 4
