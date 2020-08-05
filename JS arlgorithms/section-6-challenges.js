@@ -44,6 +44,21 @@ sameFrequency(22, 222) // false
 
 function areThereDuplicates() {
 
+    let cache = new Set()
+
     const args = Array.from(arguments)
-    args.forEach(arg => console.log(arg))
+
+    for(let arg in args) {
+        if(cache.has(args[arg])) {
+            return true
+        } else {
+            cache.add(args[arg])
+        }
+    }
+
+    return false
 }
+
+areThereDuplicates(1,2,3) // false
+areThereDuplicates(1,2,2) // true
+areThereDuplicates('a','b','c','a') // true
