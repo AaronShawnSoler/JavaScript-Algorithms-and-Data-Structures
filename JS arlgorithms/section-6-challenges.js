@@ -95,7 +95,7 @@ averagePair([], 4) // false
 
 
 //==========================================
-// Multiple Pointers - averagePair
+// Multiple Pointers - isSubsequence
 //==========================================
 
 function isSubsequence(sub, str) {
@@ -116,3 +116,35 @@ isSubsequence('hello', 'hello world') // true
 isSubsequence('sing', 'sting') // true
 isSubsequence('abc', 'abracadabra') // true
 isSubsequence('abc', 'acb') // false
+
+
+//==========================================
+// Sliding Window - maxSubarraySum
+//==========================================
+
+function maxSubarraySum(arr, size) {
+    if(arr.length < size) return null
+
+    let start = 0
+    let sum = 0
+    let max
+
+    for(let index = 0; index < arr.length; index++) {
+        let diff = index - start + 1
+        sum += arr[index]
+        if(diff > size) {
+            sum -= arr[start]
+            start += 1
+            if(sum > max) max = sum
+        } else if(diff == size) max = sum
+    
+    }
+
+    return max
+}
+
+maxSubarraySum([100,200,300,400], 2) // 700
+maxSubarraySum([1,4,2,10,23,3,1,0,20], 4) // 39
+maxSubarraySum([-3,4,0,-2,6,-1], 2) // 5
+maxSubarraySum([3,-2,7,-4,1,-1,4,-2,1], 2) // 5
+maxSubarraySum([2,3], 3) // null
