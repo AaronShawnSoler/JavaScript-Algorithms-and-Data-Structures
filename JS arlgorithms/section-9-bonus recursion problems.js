@@ -16,16 +16,14 @@ function reverse(str){
 // =========================================
 
 
-function isPalindrome(str, result = true){
+function isPalindrome(str, result = 0){
     if(str.length < 2) {
-        console.log(str, result)
-        return result
+        return result > 0 ? false : true
     }
     let first = str[0]
     let last = str[str.length - 1]
-    first != last ? result = false : null
-    console.log(first, last, first == last ? true : false, result)
-    return result + isPalindrome(str.substring(1, str.length - 1), result)
+    if(first != last) result += 1
+    return isPalindrome(str.substring(1,str.length - 1), result)
 }
 
 console.log(isPalindrome('awesome')) // false
