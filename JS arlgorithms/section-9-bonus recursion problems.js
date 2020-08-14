@@ -74,3 +74,16 @@ console.log(flatten([1, 2, 3, [4, 5] ])) // [1, 2, 3, 4, 5]
 console.log(flatten([1, [2, [3, 4], [[5]]]])) // [1, 2, 3, 4, 5]
 console.log(flatten([[1],[2],[3]])) // [1,2,3]
 console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]])) // [1,2,3]
+
+
+// =========================================
+// Capitalize first
+// =========================================
+
+function capitalizeFirst (arr) {
+    if(arr.length == 0) return arr
+    arr[0] = arr[0][0].toUpperCase() + arr[0].slice(1)
+    return [arr[0]].concat(capitalizeFirst(arr.slice(1)))
+}
+
+console.log(capitalizeFirst(['car','taco','banana'])); // ['Car','Taco','Banana']
