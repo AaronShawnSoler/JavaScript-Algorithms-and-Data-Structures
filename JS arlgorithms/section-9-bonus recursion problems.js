@@ -24,11 +24,11 @@ function isPalindrome(str){
     return isPalindrome(str.substring(1,str.length - 1))
 }
 
-console.log(isPalindrome('awesome')) // false
-console.log(isPalindrome('foobar')) // false
-console.log(isPalindrome('tacocat')) // true
-console.log(isPalindrome('amanaplanacanalpanama')) // true
-console.log(isPalindrome('amanaplanacanalpandemonium')) // false
+// console.log(isPalindrome('awesome')) // false
+// console.log(isPalindrome('foobar')) // false
+// console.log(isPalindrome('tacocat')) // true
+// console.log(isPalindrome('amanaplanacanalpanama')) // true
+// console.log(isPalindrome('amanaplanacanalpandemonium')) // false
 
 
 // =========================================
@@ -48,3 +48,29 @@ const isOdd = val => val % 2 !== 0;
 // console.log(someRecursive([4,6,8,9], isOdd)) // true
 // console.log(someRecursive([4,6,8], isOdd)) // false
 // console.log(someRecursive([4,6,8], val => val > 10)) // false
+
+
+// =========================================
+// Flatten Array
+// =========================================
+
+function flatten(arr){
+
+    let store = []
+    let flat = true
+    for(let index in arr) {
+        if(Array.isArray(arr[index])) {
+            flat = false
+            store = store.concat(arr[index])
+        } else {
+            store.push(arr[index])
+        }
+    }
+    if(flat == true) return store
+    return flatten(store)
+}
+
+console.log(flatten([1, 2, 3, [4, 5] ])) // [1, 2, 3, 4, 5]
+console.log(flatten([1, [2, [3, 4], [[5]]]])) // [1, 2, 3, 4, 5]
+console.log(flatten([[1],[2],[3]])) // [1,2,3]
+console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]])) // [1,2,3]
