@@ -144,3 +144,17 @@ var obj3 = {
 // console.log(nestedEvenSum(obj1)); // 6
 // console.log(nestedEvenSum(obj2)); // 10
 // console.log(nestedEvenSum(obj3)); // 
+
+
+// =========================================
+// Capitalize Words
+// =========================================
+
+function capitalizeWords(arr) {
+    if(arr.length == 0) return arr
+    arr[0] = arr[0].toUpperCase()
+    return [arr[0]].concat(capitalizeWords(arr.slice(1)))
+}
+
+// let words = ['i', 'am', 'learning', 'recursion'];
+// console.log(capitalizeWords(words)); // ['I', 'AM', 'LEARNING', 'RECURSION']
