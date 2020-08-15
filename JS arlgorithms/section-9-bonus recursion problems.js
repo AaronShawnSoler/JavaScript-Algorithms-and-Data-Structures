@@ -95,7 +95,20 @@ function capitalizeFirst (arr) {
 // =========================================
 
 function nestedEvenSum (obj) {
-    
+    if(typeof obj != "object") return obj % 2 == 0 ? obj : 0
+
+    let sum = 0
+    let nested = []
+    Object.keys(obj).forEach(key => {
+        if(obj[key] % 2 == 0) {
+            sum += obj[key]
+        } else if(typeof obj[key] == "object") {
+            nested.push(obj[key])
+        }
+    })
+
+    nested.forEach(obj => sum += nestedEvenSum(obj))
+    return sum
 }
 
 var obj1 = {
@@ -116,7 +129,18 @@ var obj2 = {
     c: {c: {c: 2}, cc: 'ball', ccc: 5},
     d: 1,
     e: {e: {e: 2}, ee: 'car'}
+};
+
+var obj3 = {
+    a: 8,
+    b: {
+        c: 2,
+        d: {
+            e: 4
+        }
+    }
 }
 
-nestedEvenSum(obj1); // 6
-nestedEvenSum(obj2); // 10
+// console.log(nestedEvenSum(obj1)); // 6
+// console.log(nestedEvenSum(obj2)); // 10
+// console.log(nestedEvenSum(obj3)); // 
