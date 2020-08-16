@@ -29,7 +29,7 @@ function bubbleSort(arr) {
     return arr
 }
 
-// console.log(bubbleSort([2,1,5,3,4,0,-5,-1,-2,-4,-3])) // [1,2,3,4,5]
+// console.log(bubbleSort([2,1,5,3,4,0,-5,-1,-2,-4,-3])) // [-5,-4,-3,-2,-1,0,1,2,3,4,5]
 
 // =====================================================
 // Selection Sort
@@ -59,4 +59,26 @@ function selectionSort(arr) {
     return arr
 }
 
-// console.log(selectionSort([2,1,5,3,4,0,-5,-1,-2,-4,-3])) // [1,2,3,4,5]
+// console.log(selectionSort([2,1,5,3,4,0,-5,-1,-2,-4,-3])) // [-5,-4,-3,-2,-1,0,1,2,3,4,5]
+
+
+// =====================================================
+// Insertion Sort
+// =====================================================
+
+function insertionSort(arr) {
+    // loop over array starting at 1
+    for(let sort = 1; sort < arr.length; sort++) {
+        // scan backwards and check if item to sort is less than previous element
+        for(let index = sort; index > 0; index--) {
+            // if curr element is less than previous element swap them
+            if(arr[index] < arr[index - 1]){
+                [arr[index], arr[index - 1]] = [arr[index - 1], arr[index]]
+            }
+        }
+    }
+
+    return arr
+} 
+
+console.log(insertionSort([2,1,5,3,4,0,-5,-1,-2,-4,-3])) // [-5,-4,-3,-2,-1,0,1,2,3,4,5]
