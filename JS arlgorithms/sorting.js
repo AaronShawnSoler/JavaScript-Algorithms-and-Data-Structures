@@ -110,5 +110,20 @@ function merge(arr1, arr2) {
     return newArr
 }
 
-console.log(merge([1,3,5,7],[2,4,6,8])) // [1,2,3,4,5,6,7,8]
-console.log(merge([1,3,5,7],[2,4,6,8,9])) // [1,2,3,4,5,6,7,8]
+// console.log(merge([1,3,5,7],[2,4,6,8])) // [1,2,3,4,5,6,7,8]
+// console.log(merge([1,3,5,7],[2,4,6,8,9])) // [1,2,3,4,5,6,7,8]
+
+function mergeSort(arr) {
+    // arrays with 0 or 1 elements are sorted so return it
+    if(arr.length <= 1) return arr
+
+    // cut array in half
+    let mid = arr.length / 2
+    let left = arr.slice(0, mid)
+    let right = arr.slice(mid, arr.length)
+
+    // merge the two halfs
+    return merge(mergeSort(left), mergeSort(right))
+}
+
+console.log(mergeSort([2,1,5,3,4,0,-5,-1,-2,-4,-3])) // [-5,-4,-3,-2,-1,0,1,2,3,4,5]
