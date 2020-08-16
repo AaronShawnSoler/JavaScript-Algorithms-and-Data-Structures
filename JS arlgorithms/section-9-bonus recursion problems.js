@@ -3,7 +3,10 @@
 // =========================================
 
 function reverse(str){
+    // return last letter to flip
     if(str.length == 1) return str[0]
+
+    // return last letter and whatever is left in the string
     return str[str.length - 1] + reverse(str.substring(0, str.length - 1))
 }
 
@@ -17,10 +20,15 @@ function reverse(str){
 
 
 function isPalindrome(str){
+    // if there is 1 or 0 letters then its true
     if(str.length < 2) return true
+
+    // if letters at the ends dont match its not a palindrome
     let first = str[0]
     let last = str[str.length - 1]
     if(first != last) return false
+
+    // check next two numbers
     return isPalindrome(str.substring(1,str.length - 1))
 }
 
@@ -36,8 +44,13 @@ function isPalindrome(str){
 // =========================================
 
 function someRecursive(arr, cb){
+    // if theres no more elements then cb didnt return true on any element
     if(arr.length == 0) return false
+
+    // return true if cb is valid
     if(cb(arr[0])) return true
+
+    // check next element
     return someRecursive(arr.slice(1), cb)
 }
 
@@ -58,15 +71,21 @@ function flatten(arr){
 
     let store = []
     let flat = true
+
+    // if element is a number just add it to our store else merge array with current store
     for(let index in arr) {
         if(Array.isArray(arr[index])) {
+            // if we have to merge we can assume the array isn't flat yet
             flat = false
             store = store.concat(arr[index])
         } else {
             store.push(arr[index])
         }
     }
+
+    // we looped over every element and didn't have to merge so we know we are flat
     if(flat == true) return store
+
     return flatten(store)
 }
 
@@ -81,8 +100,13 @@ function flatten(arr){
 // =========================================
 
 function capitalizeFirst (arr) {
+    // if array is empty theres no more letters to check
     if(arr.length == 0) return arr
+
+    // change elements first letter to capital
     arr[0] = arr[0][0].toUpperCase() + arr[0].slice(1)
+
+    // move on to next element
     return [arr[0]].concat(capitalizeFirst(arr.slice(1)))
 }
 
@@ -95,10 +119,11 @@ function capitalizeFirst (arr) {
 // =========================================
 
 function nestedEvenSum (obj) {
-    if(typeof obj != "object") return obj % 2 == 0 ? obj : 0
 
     let sum = 0
     let nested = []
+
+    // if value is even add it to sum else if its an object add to nested array
     Object.keys(obj).forEach(key => {
         if(obj[key] % 2 == 0) {
             sum += obj[key]
@@ -107,7 +132,9 @@ function nestedEvenSum (obj) {
         }
     })
 
+    // check nested objects for even numbers
     nested.forEach(obj => sum += nestedEvenSum(obj))
+
     return sum
 }
 
@@ -151,8 +178,13 @@ var obj3 = {
 // =========================================
 
 function capitalizeWords(arr) {
+    // if array is empty there's no more words to check
     if(arr.length == 0) return arr
+
+    // set word to uppercase
     arr[0] = arr[0].toUpperCase()
+
+    // move to next word
     return [arr[0]].concat(capitalizeWords(arr.slice(1)))
 }
 
@@ -167,6 +199,8 @@ function capitalizeWords(arr) {
 function stringifyNumbers(obj) {
 
     let nested = []
+
+    // if object is number convert to string else push objects to nested array
     Object.keys(obj).forEach(key => {
         if(typeof obj[key] == "number") {
             obj[key] = obj[key].toString()
@@ -175,7 +209,9 @@ function stringifyNumbers(obj) {
         }
     })
 
+    // check for numbers in nested objects
     nested.forEach(obj => stringifyNumbers(obj))
+    
     return obj
 }
 
