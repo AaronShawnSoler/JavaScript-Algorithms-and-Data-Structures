@@ -81,4 +81,34 @@ function insertionSort(arr) {
     return arr
 } 
 
-console.log(insertionSort([2,1,5,3,4,0,-5,-1,-2,-4,-3])) // [-5,-4,-3,-2,-1,0,1,2,3,4,5]
+// console.log(insertionSort([2,1,5,3,4,0,-5,-1,-2,-4,-3])) // [-5,-4,-3,-2,-1,0,1,2,3,4,5]
+
+
+// =====================================================
+// Merge Sort
+// =====================================================
+
+function merge(arr1, arr2) {
+    let a = 0
+    let b = 0
+    let newArr = []
+
+    while(newArr.length != arr1.length + arr2.length) {
+
+        if(arr1[a] < arr2[b]) {
+            newArr.push(arr1[a])
+            a++
+        } else if(arr2[b] < arr1[a]) {
+            newArr.push(arr2[b])
+            b++
+        }
+
+        if(a == arr1.length) newArr = newArr.concat(arr2.slice(b))
+        if(b == arr2.length) newArr = newArr.concat(arr1.slice(a))
+    }
+
+    return newArr
+}
+
+console.log(merge([1,3,5,7],[2,4,6,8])) // [1,2,3,4,5,6,7,8]
+console.log(merge([1,3,5,7],[2,4,6,8,9])) // [1,2,3,4,5,6,7,8]
