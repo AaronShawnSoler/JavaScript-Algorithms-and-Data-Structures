@@ -35,17 +35,9 @@ function binarySearch(arr, target){
         // if center equals target return index
         // else if center less than target check right half
         // else if center greater than target check left half
-        if(arr[center] == target) {
-            return center
-
-        } else if(arr[center] < target) {
-            left = center
-            continue
-            
-        } else if(arr[center] > target) {
-            right = center
-            continue
-        }
+        if(arr[center] == target) return center
+        if(arr[center] < target) left = center
+        if(arr[center] > target) right = center
     }
 
     // return -1 if target was not found
