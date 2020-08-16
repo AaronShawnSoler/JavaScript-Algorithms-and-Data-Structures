@@ -158,3 +158,79 @@ function capitalizeWords(arr) {
 
 // let words = ['i', 'am', 'learning', 'recursion'];
 // console.log(capitalizeWords(words)); // ['I', 'AM', 'LEARNING', 'RECURSION']
+
+
+// =========================================
+// Stringify Numbers
+// =========================================
+
+function stringifyNumbers(obj) {
+
+    let nested = []
+    Object.keys(obj).forEach(key => {
+        if(typeof obj[key] == "number") {
+            obj[key] = obj[key].toString()
+        } else if(typeof obj[key] == "object") {
+            nested.push(obj[key])
+        }
+    })
+
+    nested.forEach(obj => stringifyNumbers(obj))
+    return obj
+}
+
+let obj4 = {
+    num: 1,
+    test: [],
+    data: {
+        val: 4,
+        info: {
+            isRight: true,
+            random: 66
+        }
+    },
+    a: {
+        b: 3
+    }
+}
+
+// console.log(stringifyNumbers(obj4)) 
+
+
+// =========================================
+// Collect Strings
+// =========================================
+
+function collectStrings(obj) {
+
+    let strings = []
+    let nested = []
+    Object.keys(obj).forEach(key => {
+        if(typeof obj[key] == "string") {
+            strings.push(obj[key])
+        } else if(typeof obj[key] == "object") {
+            nested.push(obj[key])
+        }
+    })
+
+    nested.forEach(obj => strings = strings.concat(collectStrings(obj)))
+    return strings
+}
+
+const obj5 = {
+    stuff: "foo",
+    data: {
+        val: {
+            thing: {
+                info: "bar",
+                moreInfo: {
+                    evenMoreInfo: {
+                        weMadeIt: "baz"
+                    }
+                }
+            }
+        }
+    }
+}
+
+console.log(collectStrings(obj5))
