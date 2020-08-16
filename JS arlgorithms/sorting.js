@@ -126,4 +126,29 @@ function mergeSort(arr) {
     return merge(mergeSort(left), mergeSort(right))
 }
 
-console.log(mergeSort([2,1,5,3,4,0,-5,-1,-2,-4,-3])) // [-5,-4,-3,-2,-1,0,1,2,3,4,5]
+// console.log(mergeSort([2,1,5,3,4,0,-5,-1,-2,-4,-3])) // [-5,-4,-3,-2,-1,0,1,2,3,4,5]
+
+
+// =====================================================
+// Pivot Sort
+// =====================================================
+
+function pivotHelper(arr, start = 0, end = arr.length) {
+    let pivot = 0
+    let pivotIndex = pivot
+
+    // if element is less than pivot increase pivotIndex and swap curr element
+    for(let index = start; index < end; index++) {
+        if(arr[index] < arr[pivot]) {
+            pivotIndex++
+            [arr[pivotIndex], arr[index]] = [arr[index], arr[pivotIndex]]
+        }
+    }
+
+    // swap pivot with pivot index
+    [arr[pivot], arr[pivotIndex]] = [arr[pivotIndex], arr[pivot]]
+
+    return pivotIndex
+}
+
+console.log(pivotHelper([2,1,5,3,4,0,-5,-1,-2,-4,-3])) // [-3,1,0,-5,-1,-2,-4,2,5,3,4]
