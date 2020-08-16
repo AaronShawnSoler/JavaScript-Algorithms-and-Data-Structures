@@ -200,7 +200,7 @@ function stringifyNumbers(obj) {
 
     let nested = []
 
-    // if object is number convert to string else push objects to nested array
+    // if value is number convert to string else push objects to nested array
     Object.keys(obj).forEach(key => {
         if(typeof obj[key] == "number") {
             obj[key] = obj[key].toString()
@@ -211,7 +211,7 @@ function stringifyNumbers(obj) {
 
     // check for numbers in nested objects
     nested.forEach(obj => stringifyNumbers(obj))
-    
+
     return obj
 }
 
@@ -241,6 +241,8 @@ function collectStrings(obj) {
 
     let strings = []
     let nested = []
+
+    // if value is a string add it to strings array else add objects to nested array
     Object.keys(obj).forEach(key => {
         if(typeof obj[key] == "string") {
             strings.push(obj[key])
@@ -249,7 +251,9 @@ function collectStrings(obj) {
         }
     })
 
+    // combine returned arrays from nested objects
     nested.forEach(obj => strings = strings.concat(collectStrings(obj)))
+
     return strings
 }
 
@@ -269,4 +273,4 @@ const obj5 = {
     }
 }
 
-console.log(collectStrings(obj5))
+// console.log(collectStrings(obj5))
