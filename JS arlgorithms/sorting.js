@@ -155,7 +155,10 @@ function pivotHelper(arr, start = 0, end = arr.length - 1) {
 
 function quickSort(arr, start = 0, end = arr.length - 1) {
     if(start < end) {
+        // calculate index of pivot
         let pivot = pivotHelper(arr, start, end)
+
+        // quickSort left and right sides not including pivot
         quickSort(arr, start, pivot - 1)
         quickSort(arr, pivot + 1, end)
     }
@@ -163,4 +166,64 @@ function quickSort(arr, start = 0, end = arr.length - 1) {
     return arr
 }
 
-console.log(quickSort([2,1,5,3,4,0,-5,-1,-2,-4,-3]))
+// console.log(quickSort([2,1,5,3,4,0,-5,-1,-2,-4,-3])) // [-5,-4,-3,-2,-1,0,1,2,3,4,5]
+
+
+// =====================================================
+// Radix Sort
+// =====================================================
+
+function getDigit(num, place) {
+    return Math.floor(Math.abs(num) / Math.pow(10, place)) % 10
+}
+
+// console.log(getDigit(1234, 0)) // 4
+// console.log(getDigit(1234, 4)) // 0
+// console.log(getDigit(4321, 2)) // 3
+
+
+function digitCount(num) {
+    if(num == 0) return 1
+    return Math.floor(Math.log10(Math.abs(num))) + 1
+}
+
+// console.log(digitCount(1)) // 1
+// console.log(digitCount(12)) // 2
+// console.log(digitCount(123)) // 3
+
+
+function mostDigits(arr) {
+    let maxDigits = 0
+    for(let index in arr) {
+        maxDigits = Math.max(maxDigits, digitCount(arr[index]))
+    }
+    return maxDigits
+}
+
+// console.log(mostDigits([1234,56,7])) // 4
+// console.log(mostDigits([1,1,11111,1])) // 5
+// console.log(mostDigits([12,34,56,78])) // 2
+
+
+function radixSort(arr) {
+    let largestNumber = mostDigits(arr)
+
+    // storage for buckets
+    let buckets = {}
+    
+    // loop over how many digits there are in the biggest number
+    for(let place = 0; place <= largestNumber; place++){
+        // create buckets with base 10 numbers
+        for(let bucket = 0; bucket <= 9; bucket++) buckets[bucket] = []
+        // place digit in respective bucket for their current place
+        arr.forEach(number => buckets[getDigit(number, place)].push(number))
+        
+        // wipe array and rebuild it using our buckets
+        arr = []
+        Object.keys(buckets).forEach(key => arr = arr.concat(buckets[key]))
+    }
+
+    return arr
+}
+
+console.log(radixSort([211,1456,515,38,4,0,535,14,243,45,3])) // 
