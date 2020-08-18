@@ -104,8 +104,11 @@ class SinglyLinkedList {
 
     get(index) {
         if(index < 0 || index >= this.length) return null
+
         let counter = 0
         let curr = this.head
+
+        // keep going next until we hit the index
         while(counter < index) {
             counter++
             curr = curr.next
@@ -115,20 +118,28 @@ class SinglyLinkedList {
     }
 
     set(index, val) {
+        // get node at that index
         let node = this.get(index)
+
+        // if it exists set its value
         if(node) {
             node.val = val
             return true
         }
+
         return false
     }
 
     insert(index, val) {
         if(index < 0 || index > this.length) return false
+        
+        // insert at the start
         if(index == 0) {
             this.unshift(val)
             return true
         }
+
+        // insert at the end
         if(index == this.length) {
             this.push(val)
             return true
@@ -137,6 +148,7 @@ class SinglyLinkedList {
         let newNode = new Node(val)
         let node = this.get(index - 1)
         
+        // set node before index to newly created node
         newNode.next = node.next
         node.next = newNode
 
@@ -147,9 +159,14 @@ class SinglyLinkedList {
 
     remove(index) {
         if(index < 0 || index >= this.length) return false
+
+        // remove from start
         if(index == 0) return this.shift()
+
+        // remove from end
         if(index == this.length - 1) return this.pop()
 
+        // get node before index and point it to the NEXT NEXT node
         let node = this.get(index - 1)
         let retVal = node.next
         node.next = node.next.next
