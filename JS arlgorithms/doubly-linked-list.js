@@ -124,6 +124,69 @@ class DoublyLinkedList {
 
         return curr
     }
+
+    set(index, val) {
+        let node = this.get(index)
+
+        if(node) {
+            node.val = val
+            return true
+        }
+
+        return false
+    }
+
+    insert(index, val) {
+        if(index < 0 || index > this.length) return false
+
+        // insert at start of dll
+        if(index == 0) {
+            this.unshift(val)
+            return true
+        }
+
+        // insert at end of dll
+        if(index == this.length) {
+            this.push(val)
+            return true
+        }
+
+        // create new node and get node before
+        let newNode = new DNode(val)
+        let node = this.get(index - 1)
+
+        // connect new node to dll
+        newNode.next = node.next
+        newNode.prev = node
+        node.next.prev = newNode
+        node.next = newNode
+
+        // increase length
+        this.length++
+
+        return true
+    }
+
+    remove(index) {
+        if(index < 0 || index >= this.length) return false
+
+        // remove from start
+        if(index == 0) return this.shift()
+
+        // remove from end
+        if(index == this.length - 1) return this.pop()
+
+        // remove node at index
+        let node = this.get(index - 1)
+        let retVal = node.next
+        node.next = node.next.next
+        node.next.prev = node
+
+        // reduce length
+        this.length--
+
+        return retVal
+    }
 }
 
 const dll = new DoublyLinkedList()
