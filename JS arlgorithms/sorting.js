@@ -226,4 +226,13 @@ function radixSort(arr) {
     return arr
 }
 
-console.log(radixSort([211,1456,515,38,4,0,535,14,243,45,3])) // 
+/**
+ * (NOTE: Only works for positive numbers currently)
+ * 
+ * In order to get this to work for negatives we need 
+ * to create a radix for our negative numbers,
+ * reverse that list,
+ * and append it to the beginning of our positive radix set.
+ */
+
+// console.log(radixSort([211,1456,515,38,4,0,535,14,243,45,3])) // [0, 3, 4, 14, 38, 45, 211, 243, 515, 535, 1456]
