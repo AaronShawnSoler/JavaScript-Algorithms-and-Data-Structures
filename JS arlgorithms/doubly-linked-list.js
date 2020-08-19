@@ -187,6 +187,17 @@ class DoublyLinkedList {
 
         return retVal
     }
+
+    reverse() {
+        let curr = this.head
+
+        while(curr) {
+            [curr.next, curr.prev] = [curr.prev, curr.next]
+            curr = curr.prev
+        }
+
+        [this.head, this.tail] = [this.tail, this.head]
+    }
 }
 
 const dll = new DoublyLinkedList()
