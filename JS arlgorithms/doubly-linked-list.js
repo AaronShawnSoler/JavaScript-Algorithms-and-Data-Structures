@@ -201,11 +201,3 @@ class DoublyLinkedList {
 }
 
 const dll = new DoublyLinkedList()
-
-dll.push(1)
-dll.push(2)
-dll.push(3)
-dll.push(4)
-dll.push(5)
-
-dll.print()
