@@ -1,0 +1,11 @@
+// https://gyazo.com/0c3be24fc113a56f0d2a7b366d7d5ab0
+
+// we need this file for IntelliSense
+
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6"
+  },
+  "exclude": ["node_modules"]
+}
