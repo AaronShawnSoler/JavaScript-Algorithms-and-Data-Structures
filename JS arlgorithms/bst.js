@@ -86,6 +86,51 @@ class BinarySearchTree {
 
         return visited
     }
+
+    dfsPreOrder() {
+        if(!this.root) return undefined
+
+        let visited = []
+        
+        function preOrder(node) {
+            visited.push(node.val)
+            if(node.left) preOrder(node.left)
+            if(node.right) preOrder(node.right)
+        }
+        preOrder(this.root)
+
+        return visited
+    }
+
+    dfsPostOrder() {
+        if(!this.root) return undefined
+
+        let visited = []
+
+        function postOrder(node) {
+            if(node.left) postOrder(node.left)
+            if(node.right) postOrder(node.right)
+            visited.push(node.val)
+        }
+        postOrder(this.root)
+
+        return visited
+    }
+
+    dfsFirstOrder() {
+        if(!this.root) return undefined
+
+        let visited = []
+
+        function firstOrder(node) {
+            if(node.left) firstOrder(node.left)
+            visited.push(node.val)
+            if(node.right) firstOrder(node.right)
+        }
+        firstOrder(this.root)
+
+        return visited
+    }
 }
 
 const btree = new BinarySearchTree()
