@@ -74,5 +74,3 @@ binaryHeap.insert(5)
 binaryHeap.insert(0)
 binaryHeap.insert(20)
 binaryHeap.insert(25)
-
-console.log(binaryHeap.heap)
