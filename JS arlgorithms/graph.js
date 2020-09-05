@@ -81,6 +81,57 @@ class Graph {
 
         return path
     }
+
+    dijkstra(start, end) {
+        const priority = new PriorityQueue()
+        const distances = {}
+        const previous = {}
+        let path = []
+        let smallest
+
+        // builds initial state
+        for(let key in this.adjList) {
+            if(key == start) {
+                distances[key] = 0
+                priority.enqueue(key, 0)
+            } else {
+                distances[key] = Infinity
+                priority.enqueue(key, Infinity)
+            }
+            previous[key] = null
+        }
+
+        // while there are items in priority queue
+        while(priority.heap.length) {
+            smallest = priority.dequeue().val
+            if(smallest == end) {
+                while(previous[smallest]) {
+                    path.push(smallest)
+                    smallest = previous[smallest]
+                }
+            }
+
+            if(smallest || distances[smallest] != Infinity) {
+                for(let neighbor in this.adjList[smallest]) {
+                    // find neighbor
+                    let nextNode = this.adjList[smallest][neighbor]
+                    // calculate new distance to neighbor
+                    let distFromStart = distances[smallest] + nextNode.weight
+                    let nextNeighbor = nextNode.node
+
+                    if(distFromStart < distances[nextNeighbor]) {
+                        // updating new smallest distance
+                        distances[nextNeighbor] = distFromStart
+                        // updating previous
+                        previous[nextNeighbor] = smallest
+                        // enqueue with new priority (weight)
+                        priority.enqueue(nextNeighbor, distFromStart)
+                    }
+                }
+            }
+        }
+        return path
+    }
 }
 
 const graph = new Graph()
@@ -92,12 +143,14 @@ graph.addVertex('d')
 graph.addVertex('e')
 graph.addVertex('f')
 
-graph.addEdge('a', 'b', 10)
-graph.addEdge('a', 'c', 12)
-graph.addEdge('b', 'd', 5)
-graph.addEdge('c', 'e', 7)
-graph.addEdge('d', 'e', 9)
-graph.addEdge('d', 'f', 15)
-graph.addEdge('e', 'f', 3)
+graph.addEdge('a', 'b', 4)
+graph.addEdge('a', 'c', 2)
+graph.addEdge('b', 'e', 3)
+graph.addEdge('c', 'd', 2)
+graph.addEdge('d', 'e', 3)
+graph.addEdge('d', 'f', 1)
+graph.addEdge('c', 'f', 4)
+graph.addEdge('e', 'f', 1)
 
 console.log(graph.adjList)
+
