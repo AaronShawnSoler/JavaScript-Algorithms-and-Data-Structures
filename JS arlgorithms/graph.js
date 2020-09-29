@@ -153,4 +153,3 @@ graph.addEdge('c', 'f', 4)
 graph.addEdge('e', 'f', 1)
 
 console.log(graph.adjList)
-
