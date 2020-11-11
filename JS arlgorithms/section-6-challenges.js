@@ -45,15 +45,14 @@ function areThereDuplicates() {
 
     let cache = new Set()
 
-    const args = Array.from(arguments)
+   const args = Array.from(arguments)
 
     // check if items already exists in args
     for(let arg in args) {
         if(cache.has(args[arg])) {
             return true
-        } else {
-            cache.add(args[arg])
         }
+        cache.add(args[arg])
     }
 
     return false
@@ -63,7 +62,9 @@ areThereDuplicates(1,2,3) // false
 areThereDuplicates(1,2,2) // true
 areThereDuplicates('a','b','c','a') // true
 
-
+console.log(areThereDuplicates(1,2,3))
+console.log(areThereDuplicates(1,2,2))
+console.log(areThereDuplicates('a','b','c','a'))
 //==========================================
 // Multiple Pointers - averagePair
 //==========================================
